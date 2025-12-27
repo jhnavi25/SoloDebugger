@@ -1,7 +1,7 @@
 # 🔍 SoloDebugger: Faculty Expertise Finder
 **Connecting Students with Mentorship, Instantly.**
 
-[![Live MVP](https://img.shields.io/badge/Live-MVP_Link-green?style=for-the-badge)](INSERT_YOUR_RENDER_LINK_HERE)
+[![Live MVP](https://img.shields.io/badge/Live-MVP_Link-green?style=for-the-badge)](https://solodebugger.onrender.com)
 [![Flask](https://img.shields.io/badge/Flask-v3.0-blue?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
@@ -43,4 +43,4 @@ The system follows a Model-View-Controller (MVC) architecture:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/SoloDebugger.git]
+   git clone [https://github.com/jhnavi25/SoloDebugger]
