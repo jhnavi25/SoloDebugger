@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Expertise Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --dark: #2c3e50;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #333;
+        }
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .welcome-section, .login-section {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+        }
+        .welcome-card, .login-card {
+            padding:50px;
+            border-radius:24px;
+            max-width:500px;
+            text-align:center;
+        }
+        .welcome-title {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text; 
+    background-clip: text;         
+    -webkit-text-fill-color: transparent;
+}
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color:white;
+            border:none;
+            padding:14px 30px;
+            border-radius:30px;
+            font-weight: 600;
+            cursor:pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .login-section, .app-section { display:none; }
+        .container {
+            max-width:1100px;
+            margin:40px auto;
+            border-radius:20px;
+            overflow:hidden;
+        }
+        .header {
+            background: var(--dark);
+            color:white;
+            padding:40px;
+            text-align:center;
+            position:relative;
+        }
+        .logout-btn {
+            position:absolute;
+            top:20px;
+            right:20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .search-section { 
+            padding:30px; 
+            background:#f8f9fa; 
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .search-section input, .search-section select {
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            outline: none;
+            min-width: 200px;
+        }
+        .faculty-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:25px;
+            padding:30px;
+            background: white;
+        }
+        .faculty-card {
+            border: 1px solid #eee;
+            padding: 25px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .faculty-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .skill-tag {
+            background: #eef2ff;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            margin: 4px 2px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        .contact-link {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .material-icons { vertical-align: middle; font-size: 18px; }
+    </style>
+</head>
+<body>
+<div id="welcomeSection" class="welcome-section">
+    <div class="welcome-card glass-card">
+        <span class="material-icons" style="font-size: 50px; color: #667eea;">school</span>
+        <h1 class="welcome-title">Faculty Finder</h1>
+        <p style="color: #666;">Connect with the right academic mentors for your research and projects.</p><br>
+        <button class="btn" onclick="showLogin()">
+            Get Started <span class="material-icons">arrow_forward</span>
+        </button>
+    </div>
+</div>
+<div id="loginSection" class="login-section">
+    <div class="login-card glass-card">
+        <h2 style="margin-bottom:20px;">Student Login</h2>
+        <form onsubmit="handleLogin(event)">
+            <input id="studentName" type="text" placeholder="Enter Your Full Name" style="padding:15px; width:100%; border-radius:12px; border:1px solid #ddd; margin-bottom:20px;" required>
+            <button type="submit" class="btn" style="width: 100%; justify-content: center;">
+                Login to Dashboard
+            </button>
+        </form>
+    </div>
+</div>
+<div id="appSection" class="app-section">
+    <div class="container glass-card">
+        <div class="header">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+            <p id="welcomeUser" style="opacity: 0.8; font-size: 0.9rem;">Welcome</p>
+            <h1 style="font-weight: 600; letter-spacing: -1px;">Expertise Directory</h1>
+        </div>
+        <div class="search-section">
+            <form method="GET" action="/search" style="display:flex; gap:10px; flex-wrap:wrap; width:100%; justify-content:center;">
+                <input name="search" placeholder="Search skills (e.g. AI, Java)..." value="{{ search_term }}">
+                <select name="department">
+                    <option value="">All Departments</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Data Science">Data Science</option>
+                </select>
+                <button type="submit" class="btn">
+                    <span class="material-icons">search</span> Search
+                </button>
+            </form>
+        </div>
+        <div class="results">
+            {% if faculty_list %}
+            <div class="faculty-grid">
+                {% for prof in faculty_list %}
+                <div class="faculty-card">
+                    <div style="display:flex; justify-content:space-between; align-items:start;">
+                        <div>
+                            <h3 style="color: var(--dark);">{{ prof.name }}</h3>
+                            <p style="font-size:0.8rem; color: var(--primary); font-weight:600;">{{ prof.department }}</p>
+                        </div>
+                        <span class="material-icons" style="color: #ddd;">account_circle</span>
+                    </div>
+                    <div style="margin: 15px 0;">
+                        {% for skill in prof.expertise %}
+                            <span class="skill-tag">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                    <div style="font-size: 0.85rem; color: #666; line-height: 1.6;">
+                        <p><span class="material-icons">mail</span> {{ prof.email }}</p>
+                        <p><span class="material-icons">location_on</span> {{ prof.office }}</p>
+                    </div>
+                    <a href="mailto:{{ prof.email }}" class="contact-link">
+                        Send Inquiry <span class="material-icons" style="margin-left:5px;">send</span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+                <div style="text-align:center;padding:60px; background: white;">
+                    <span class="material-icons" style="font-size:48px; color:#ccc;">search_off</span>
+                    <p style="margin-top:10px; color:#888;">No faculty members found.</p>
+                    <a href="/" style="color: var(--primary); text-decoration:none; font-weight:600;">Clear all filters</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+const welcomeSection = document.getElementById("welcomeSection");
+const loginSection = document.getElementById("loginSection");
+const appSection = document.getElementById("appSection");
+const welcomeUser = document.getElementById("welcomeUser");
+function showLogin(){
+    welcomeSection.style.display="none";
+    loginSection.style.display="flex";
+}
+function handleLogin(e){
+    e.preventDefault();
+    const name = document.getElementById("studentName").value;
+    localStorage.setItem("user", name);
+    showApp(name);
+}
+function showApp(name){
+    welcomeSection.style.display="none";
+    loginSection.style.display="none";
+    appSection.style.display="block";
+    welcomeUser.innerText = "Logged in as: " + name;
+}
+function logout(){
+    localStorage.clear();
+    window.location.href = "/";
+}
+window.onload = () => {
+    const user = localStorage.getItem("user");
+    if(user) showApp(user);
+}
+</script>
+</body>
+</html>
